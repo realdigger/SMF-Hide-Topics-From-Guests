@@ -23,6 +23,9 @@ Questions should be address to the [url=http://www.simplemachines.org/community]
 
 
 [size=12pt][b][color=purple]Changelog[/color][/b][/size]
+[b]3.0.1[/b] - 9 January 2022
+- Added support for SMF 2.0.19
+
 [b]3.0[/b] - 6 January 2012
 - Added support for Profile and Print pages.
 

@@ -52,7 +52,7 @@
 
 	<file name="$sourcedir/Load.php">
 		<operation>
-			<search position="replace"><![CDATA[?>]]></search>
+			<search position="end" />
 			<add><![CDATA[
 // Hide Topics from Guest
 function HideTopics_who()
@@ -61,8 +61,6 @@ function HideTopics_who()
 
 	return $MAS;
 }
-
-?>
 ]]>			</add>
 		</operation>
 	</file>
