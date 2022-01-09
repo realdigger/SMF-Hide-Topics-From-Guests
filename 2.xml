@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<id>Suki:Hide_Topics_fr</id>
+	<version>3.0</version>
+	<file name="$sourcedir/Display.php">
+		<operation>
+			<search position="after"><![CDATA[
+	// What are you gonna display if these are empty?!
+	if (empty($topic))
+]]></search>
+			<add><![CDATA[
+	/* Hide Topics from Guests mod */
+	if ($context['user']['is_guest'])
+		redirectexit('action=login');
+]]></add>
+		</operation>
+	</file>
+	
+	<file name="$sourcedir/Profile-View.php">
+		<operation>
+			<search position="replace"><![CDATA[	// Some initial context.]]></search>
+			<add><![CDATA[
+	/* Hide Topics from Guests mod */
+	if ($context['user']['is_guest'])
+		redirectexit('action=login');
+
+	// Some initial context.]]></add>
+		</operation>
+	</file>
+	
+	<file name="$sourcedir/Printpage.php">
+		<operation>
+			<search position="replace"><![CDATA[	// Redirect to the boardindex if no valid topic id is provided.]]></search>
+			<add><![CDATA[
+	/* Hide Topics from Guests mod */
+	if ($context['user']['is_guest'])
+		redirectexit('action=login');
+
+	// Redirect to the boardindex if no valid topic id is provided.]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Recent.php">
+		<operation>
+			<search position="replace"><![CDATA[	// Nothing here... Or at least, nothing you can see...
+	if (empty($messages))]]></search>
+			<add><![CDATA[	// Nothing here... Or at least, nothing you can see...
+	if (empty($messages) || $context['user']['is_guest'])]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Load.php">
+		<operation>
+			<search position="replace"><![CDATA[?>]]></search>
+			<add><![CDATA[
+// Hide Topics from Guest
+function HideTopics_who()
+{
+	$MAS = '<a href="http://missallsunday.com" title="Free SMF Mods">Hide Topics from Guest mod &#169; Suki</a>';
+
+	return $MAS;
+}
+
+?>
+]]>			</add>
+		</operation>
+	</file>
+	
+	<file name="$sourcedir/Who.php">
+	<operation>
+			<search position="replace"><![CDATA[		'mods' => array(]]></search>
+			<add><![CDATA[		'mods' => array(
+			HideTopics_who(),]]></add>
+		</operation>
+	</file>Z
+</modification>
